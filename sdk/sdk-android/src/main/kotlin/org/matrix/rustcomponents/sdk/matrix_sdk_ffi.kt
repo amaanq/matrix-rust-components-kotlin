@@ -19434,7 +19434,11 @@ public interface RoomInterface {
     suspend fun `sendLiveLocation`(`geoUri`: kotlin.String)
     
     /**
-     * Send a raw event to the room.
+     * Send a raw event to the room via the send queue.
+     *
+     * This goes through the room's send queue, which handles encryption
+     * failures gracefully (e.g. VerifiedUserHasUnsignedDevice) and allows
+     * retry via the standard send failure resolution UI.
      *
      * # Arguments
      *
@@ -21479,7 +21483,11 @@ open class Room: Disposable, AutoCloseable, RoomInterface
 
     
     /**
-     * Send a raw event to the room.
+     * Send a raw event to the room via the send queue.
+     *
+     * This goes through the room's send queue, which handles encryption
+     * failures gracefully (e.g. VerifiedUserHasUnsignedDevice) and allows
+     * retry via the standard send failure resolution UI.
      *
      * # Arguments
      *
